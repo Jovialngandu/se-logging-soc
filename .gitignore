@@ -1,0 +1,42 @@
+# ==========================================
+# Logs générés par Rsyslog / Fluentd / SOC
+# ==========================================
+# Ignorer le contenu du dossier de logs centralisés
+/logs/*
+
+# Conserver le dossier /logs lui-même dans Git
+!/logs/.gitkeep
+
+# Fichiers de logs génériques
+*.log
+
+# ==========================================
+# Environnement & Secrets
+# ==========================================
+.env
+.env.local
+*.env
+
+# ==========================================
+# Données persistantes des conteneurs
+# ==========================================
+# Données Grafana, Loki ou Fluentd si stockées localement
+/data/
+/grafana-data/
+/loki-data/
+
+# ==========================================
+# Fichiers système & IDE
+# ==========================================
+# VS Code
+.vscode/
+*.code-workspace
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Fichiers temporaires Linux/Bash
+*.swp
+*.swo
+*~
