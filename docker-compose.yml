@@ -1,0 +1,24 @@
+services:
+  rsyslog-central:
+    container_name: soc-rsyslog
+    image: rsyslog/rsyslog:latest
+    ports:
+      - "514:514/udp"
+      - "514:514/tcp"
+    volumes:
+      - ./config/rsyslog/rsyslog.conf:/etc/rsyslog.conf
+      - ./logs:/var/log/remote
+    restart: always
+
+  client-alpine:
+    container_name: soc-client-alpine
+    build:
+      context: .
+      dockerfile: config/client/Dockerfile
+    ports:
+      - "2222:22"
+    environment:
+      - SYSLOG_SERVER_IP=${SYSLOG_SERVER_IP:-rsyslog-central}
+    depends_on:
+      - rsyslog-central
+    restart: always
