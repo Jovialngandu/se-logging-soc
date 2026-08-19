@@ -22,3 +22,13 @@ services:
     depends_on:
       - rsyslog-central
     restart: always
+  fluentd:
+    container_name: soc-fluentd
+    image: fluent/fluentd:v1.16-debian-1
+    user: root
+    volumes:
+      - ./config/fluentd/fluent.conf:/fluentd/etc/fluent.conf
+      - ./logs:/var/log/remote:ro
+    depends_on:
+      - rsyslog-central
+    restart: always
