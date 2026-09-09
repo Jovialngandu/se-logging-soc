@@ -34,9 +34,18 @@ se-logging-soc/
 ### Mode 1 : Environnement de test local (1 seul PC)
 Tous les services démarrent sur la même machine hôte au sein d'un réseau Docker isolé.
 
+
+
 ```bash
-# 1. Configurer les autorisations sur le dossier de logs
+
+
+# 0. Configurer les autorisations sur le dossier de logs
 chmod -R 777 ./logs
+
+
+# 1. on restart le client 
+docker restart soc-client-alpine
+
 
 # 2. Lancer la stack complète (Rsyslog, Fluentd, Loki & Client)
 docker compose up -d --build
